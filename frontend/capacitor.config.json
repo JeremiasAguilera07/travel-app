@@ -1,0 +1,6 @@
+{
+  "appId": "com.travel.argentina",
+  "appName": "Travel App Argentina",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
