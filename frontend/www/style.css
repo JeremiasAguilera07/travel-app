@@ -1,4 +1,3 @@
-/* ✨ Animación entrada */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -12,19 +11,19 @@
   }
 }
 
-/* 💎 Glass effect */
+
 .card {
   backdrop-filter: blur(10px);
   background: rgba(255,255,255,0.7);
 }
 
-/* 🚀 Hover PRO */
+
 .card:hover {
   transform: translateY(-12px) scale(1.03);
   box-shadow: 0 25px 50px rgba(0,0,0,0.2);
 }
 
-/* 🔘 Botones suaves */
+
 .btn {
   transition: all 0.3s ease;
 }
