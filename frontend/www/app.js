@@ -10,10 +10,10 @@ let allFlights = [];
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 let history = JSON.parse(localStorage.getItem("history")) || [];
 
-// 🔥 IMPORTANTE (cambiá esto si usás celular)
+
 const API_URL = "";
 
-// 🟢 Toast
+
 function showToast(msg) {
   toast.innerText = msg;
   toast.classList.add("show");
@@ -23,7 +23,6 @@ function showToast(msg) {
 function showLoading(){ loading.classList.remove('d-none'); }
 function hideLoading(){ loading.classList.add('d-none'); }
 
-// 🌍 MAPA
 let map = L.map('map').setView([-38.4161, -63.6167], 4);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -63,7 +62,7 @@ const planeIcon = L.icon({
   iconSize: [40, 40]
 });
 
-// 📍 Marcadores
+
 Object.keys(cityCoords).forEach(city => {
   L.marker(cityCoords[city]).addTo(map)
     .bindPopup(`<b>${city}</b><br>
@@ -71,7 +70,6 @@ Object.keys(cityCoords).forEach(city => {
     Ver vuelos ✈️</button>`);
 });
 
-// 🏙️ FALLBACK CIUDADES
 const localCities = [
   { name: "Buenos Aires", image: "https://source.unsplash.com/400x300/?buenosaires,city" },
   { name: "Catamarca", image: "https://source.unsplash.com/400x300/?catamarca,mountains" },
@@ -98,7 +96,7 @@ const localCities = [
   { name: "Tucumán", image: "https://source.unsplash.com/400x300/?tucuman,green" }
 ];
 
-// 🚀 CARGA AUTOMÁTICA (FUNCIONA EN CELULAR Y VERCEL)
+
 loadCities();
 
 function loadCities() {
@@ -111,7 +109,7 @@ function loadCities() {
     });
 }
 
-// 🏙️ CARGAR CIUDADES
+
 function loadCities() {
   fetch(`${API_URL}/api/cities`)
     .then(res => res.json())
@@ -122,7 +120,6 @@ function loadCities() {
     });
 }
 
-// ✈️ FALLBACK VUELOS
 function getLocalFlights(city) {
   return [
     { id: 1, from: city, to: "Buenos Aires", price: 500, airline: "LATAM", duration: "2h" },
@@ -131,7 +128,7 @@ function getLocalFlights(city) {
   ];
 }
 
-// ✈️ VUELOS
+
 function getFlights(city) {
   showLoading();
 
@@ -159,7 +156,7 @@ function getFlights(city) {
   }
 }
 
-// 🎨 Render ciudades
+
 function renderCities(data) {
   citiesContainer.innerHTML = "";
 
@@ -180,7 +177,7 @@ function renderCities(data) {
   });
 }
 
-// 🎨 Render vuelos
+
 function renderFlights(flights) {
   flightsContainer.innerHTML = "";
 
@@ -212,7 +209,7 @@ function renderFlights(flights) {
   });
 }
 
-// 🛫 Animación avión
+
 function animateFlight(from, to) {
   const start = cityCoords[from];
   const end = cityCoords[to];
@@ -244,7 +241,7 @@ function animateFlight(from, to) {
   }, 50);
 }
 
-// ❤️ Favoritos
+
 function toggleFav(id) {
   if (favorites.includes(id)) {
     favorites = favorites.filter(f => f !== id);
@@ -258,7 +255,7 @@ function toggleFav(id) {
   renderFlights(allFlights);
 }
 
-// 📄 Modal
+
 function showDetails(flight) {
   document.getElementById('modalTitle').innerText = `${flight.from} → ${flight.to}`;
   document.getElementById('modalBody').innerHTML = `
@@ -270,7 +267,7 @@ function showDetails(flight) {
   new bootstrap.Modal(document.getElementById('flightModal')).show();
 }
 
-// 🔍 Filtro
+
 priceFilter.addEventListener('input', () => {
   const maxPrice = priceFilter.value;
 
@@ -281,7 +278,7 @@ priceFilter.addEventListener('input', () => {
   renderFlights(filtered);
 });
 
-// 🕘 Historial
+
 function renderHistory() {
   historyList.innerHTML = "";
   history.slice(0,5).forEach(h => {
@@ -289,6 +286,5 @@ function renderHistory() {
   });
 }
 
-// 🚀 INIT
 loadCities();
 renderHistory();
