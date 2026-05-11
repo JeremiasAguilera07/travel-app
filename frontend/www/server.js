@@ -3,13 +3,12 @@ const cors = require('cors');
 
 const app = express();
 
-// 🔥 CONFIG
 app.use(cors({
   origin: "*"
 }));
 app.use(express.json());
 
-// 🇦🇷 Ciudades
+
 const cities = [
   { id: 1, name: "Buenos Aires", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded" },
   { id: 2, name: "Córdoba", image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a" },
@@ -21,7 +20,7 @@ const cities = [
   { id: 8, name: "Mar del Plata", image: "https://images.unsplash.com/photo-1596496050827-8299e0220de1" }
 ];
 
-// ✈️ Generador de vuelos
+
 const flights = [];
 
 cities.forEach(origin => {
@@ -39,22 +38,20 @@ cities.forEach(origin => {
   });
 });
 
-// 🌐 ROUTES
+
 app.get('/', (req, res) => {
   res.send("API funcionando 🚀");
 });
 
-// 🟢 keep alive (Render)
 app.get('/ping', (req, res) => {
   res.send("pong");
 });
 
-// 🏙️ ciudades
+
 app.get('/api/cities', (req, res) => {
   res.json(cities);
 });
 
-// ✈️ vuelos
 app.get('/api/flights', (req, res) => {
   const { from } = req.query;
 
@@ -65,7 +62,7 @@ app.get('/api/flights', (req, res) => {
   res.json(flights);
 });
 
-// 🚀 SERVER
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
